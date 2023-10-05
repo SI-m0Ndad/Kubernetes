@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the API port
-EXPOSE 3000
+EXPOSE 30000
 
 # Start the API when the container starts
 CMD ["node", "app.js"]
