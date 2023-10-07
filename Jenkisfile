@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
+        stage('Build and Deploy Flask App') {
+            steps {
+                sh 'pip install -r requirements.txt' 
+                sh 'python app.py &'
+                sleep 10 
+                error('Pipeline terminated after deploying Flask app')
+            }
+        }
+    }
+    
+    post {
+        failure {
+            echo "The pipeline failed. Clean up or handle failure scenarios here."
+        }
+    }
+}
